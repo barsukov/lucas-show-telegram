@@ -1,8 +1,8 @@
-defmodule LucasShowTotBotTest do
+defmodule LucasTest do
   use ExUnit.Case
-  doctest LucasShowTotBot
+  doctest Lucas
 
-  test "the truth" do
+  test "the telegram work" do
     assert 1 + 1 == 2
   end
 end

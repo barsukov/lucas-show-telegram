@@ -1,4 +1,4 @@
-defmodule LucasShowTotBot.Mixfile do
+defmodule Lucas.Mixfile do
   use Mix.Project
 
   def project do
@@ -14,7 +14,7 @@ defmodule LucasShowTotBot.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :yocingo, :exjsx, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -27,6 +27,10 @@ defmodule LucasShowTotBot.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:yocingo, ">= 0.0.1"},
+      {:httpoison},
+      {:trot, github: "hexedpackets/trot"}
+    ]
   end
 end
