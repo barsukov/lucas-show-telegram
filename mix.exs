@@ -29,7 +29,7 @@ defmodule Lucas.Mixfile do
   defp deps do
     [
       {:yocingo, ">= 0.0.1"},
-      {:httpoison},
+      {:httpoison, "~> 0.8.0"},
       {:trot, github: "hexedpackets/trot"}
     ]
   end

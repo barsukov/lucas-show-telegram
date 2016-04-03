@@ -19,9 +19,19 @@ defmodule Lucas.BotPoller do
     {:noreply, state}
   end
 
+  def process_messages_list({:ok, []}), do: -1
+
+  def process_messages_list(results) do
+    # for item <- results, do: item.message |> process_message
+    %{"update_id" => update_id} = results
+    update_id
+  end
+
+  def process_messages_list({:error, error}), do: Logger.log :error, error
+
   def do_pool(args) do
     try do
-      %{"update_id" => update_id } = Lucas.Bot.getUpdates(args)
+      update_id = Lucas.Bot.getUpdates(args) |> process_messages_list
       do_pool(%{timeout: args[:timeout], update_id: update_id + 1})
     rescue
       e in MatchError -> IO.inspect e

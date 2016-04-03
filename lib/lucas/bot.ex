@@ -32,7 +32,7 @@ defmodule Lucas.Bot do
     result
   end
 
-  def process_jobs([]), do: :noreply
+  def process_jobs([]), do: {:ok, []}
 
   def process_jobs([job]) do
     process_job(job)
