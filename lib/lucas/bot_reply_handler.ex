@@ -1,6 +1,6 @@
 defmodule Lucas.BotReplyHandler do
   def reply(%{"message" => %{"text" => "/cat", "chat" => %{"id" => id}}}) do
-    Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, text: "Cat!"})
+    Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, text: "Meow"})
   end
 
   def reply(_) do

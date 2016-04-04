@@ -14,7 +14,10 @@ defmodule Lucas.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :yocingo, :exjsx, :httpoison]]
+    [
+      mod: {Lucas, []},
+      applications: [:logger, :yocingo, :exjsx, :httpoison]
+    ]
   end
 
   # Dependencies can be Hex packages:
