@@ -11,18 +11,11 @@ defmodule Lucas.RankCommand do
 
   def get_rank() do
     result = get!("/").body[:standing]
-    title = "EPL TABLE"
-    header = ["Team", "Points", "Played Games"]
+    header = ["N", "Team", "Pts", "PG"]
     rows = Enum.map(result, fn (element) ->
-      [ element["teamName"] , element["points"], element["playedGames"]]
+      [ element["position"], String.slice(element["teamName"], 0..12), element["points"], element["playedGames"]]
     end)
-    Table.new(rows, header, title)
-    |> Table.put_column_meta(0..2, align: :left, padding: 1) # `0..2` is a range of column indexes. :all also works.
-    |> Table.render!()
-  end
-
-  def format_table(collection) do
-    Table.format(collection, padding: 1) |> IO.puts
+    TableRex.quick_render!(rows, header)
   end
 
   def process_response_body(body) do
