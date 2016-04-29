@@ -1,5 +1,14 @@
 defmodule Lucas.BotReplyHandler do
 
+  def reply(%{"message" => %{"left_chat_participant" => member, "chat" => %{"id" => id}}}) do
+    Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, text: "Скатертью дорога @#{member["username"]}" })
+  end
+
+  def reply(%{"message" => %{"new_chat_member" => member, "chat" => %{"id" => id}}}) do
+    message_template = "Привет дорогой @#{member["username"]}, раскажи о себе! Тебе здесь всегда рады!"
+    Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, text: message_template})
+  end
+
   def reply(%{"message" => %{"text" => text, "chat" => %{"id" => id}}}) do
     cond do
      text =~ ~r[/cat] ->
