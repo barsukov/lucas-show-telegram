@@ -14,7 +14,8 @@ defmodule Lucas.BotReplyHandler do
      text =~ ~r[/cat] ->
         Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, text: "Meow!"})
      text =~ ~r[/gelezka] ->
-       Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, text: "Никита три мохито!"})
+       random_quote = Lucas.QuoteCommand.get_random_quote
+       Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, text: random_quote})
      text =~ ~r[/rank] ->
        rank = Lucas.RankCommand.get_rank
        Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, parse_mode: "Markdown", text: "```" <> rank <> "```"})
