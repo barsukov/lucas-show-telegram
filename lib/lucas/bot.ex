@@ -1,7 +1,6 @@
 defmodule Lucas.Bot do
   use HTTPoison.Base
   require Logger
-
   def process_url(url) do
     "https://api.telegram.org/bot" <> token <> "/" <> url
   end

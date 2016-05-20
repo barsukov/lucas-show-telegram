@@ -1,4 +1,12 @@
 defmodule Lucas.BotReplyHandler do
+  def reply(%{"inline_query" => %{"id" => id , "query" => query}}) do
+    if String.length(query) > 0 do
+      results = Lucas.QuoteCommand.get_quote_by_query(query)
+      Lucas.Bot.exec_cmd("answerInlineQuery", %{inline_query_id: id, results: results})
+    else
+       IO.puts "Empty query"
+    end
+  end
 
   def reply(%{"message" => %{"left_chat_participant" => member, "chat" => %{"id" => id}}}) do
     Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, text: "Скатертью дорога @#{member["username"]}" })
