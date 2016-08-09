@@ -26,6 +26,9 @@ defmodule Lucas.BotReplyHandler do
      text =~ ~r[/rank] ->
        rank = Lucas.RankCommand.get_rank
        Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, parse_mode: "Markdown", text: "```" <> rank <> "```"})
+     text =~ ~r[/fantasy] ->
+       command_text = Lucas.FantasyCodeCommand.get_all_fantasy_code
+       Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, parse_mode: "Markdown", text: "```" <> command_text <> "```"})
      true ->
        IO.puts "Not matched"
     end

@@ -22,7 +22,6 @@ defmodule Lucas.BotPoller do
   def process_messages_list({:ok, []}), do: -1
 
   def process_messages_list(results) do
-    # for item <- results, do: item.message |> process_message
     %{"update_id" => update_id} = results
     update_id
   end
