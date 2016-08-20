@@ -6,7 +6,7 @@ defmodule Lucas.RankCommand do
   @expected_fields ~w( standing )
 
   def process_url(_) do
-    "http://api.football-data.org/v1/soccerseasons/398/leagueTable"
+    "http://api.football-data.org/v1/competitions/426/leagueTable"
   end
 
   def get_rank() do
