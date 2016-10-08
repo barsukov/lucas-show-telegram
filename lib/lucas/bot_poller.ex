@@ -3,33 +3,25 @@ defmodule Lucas.BotPoller do
   require Logger
 
   def start_link(state) do
-    GenServer.start_link(__MODULE__, state)
+    GenServer.start_link(__MODULE__, state, [name: :poller_server])
   end
 
   def init(state) do
-    IO.puts "Pooling server started"
+    Logger.info "Pooling server started"
     spawn fn ->
-      handle_cast(:start_pool, state)
+      handle_cast(:start_poll, state)
     end
     {:ok, state}
   end
 
-  def handle_cast(:start_pool, state) do
-    do_pool(state)
+  def handle_cast(:start_poll, state) do
+    do_poll(state)
     {:noreply, state}
   end
 
-  def process_messages_list({:ok, []}), do: -1
-
-  def process_messages_list(results) do
-    %{"update_id" => update_id} = results
-    update_id
-  end
-
-  def process_messages_list({:error, error}), do: Logger.log :error, error
-
-  def do_pool(args) do
-    update_id = Lucas.Bot.getUpdates(args) |> process_messages_list
-    do_pool(%{timeout: args[:timeout], update_id: update_id + 1})
+  def do_poll(args) do
+    update_id = Lucas.Bot.getUpdates(args)
+    Logger.info "Current update_id: #{update_id}"
+    do_poll(%{timeout: args[:timeout], update_id: update_id })
   end
 end
