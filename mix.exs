@@ -4,7 +4,7 @@ defmodule Lucas.Mixfile do
   def project do
     [app: :lucasshowtotbot,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -16,7 +16,7 @@ defmodule Lucas.Mixfile do
   def application do
     [
       mod: {Lucas, []},
-      applications: [:logger, :yocingo, :exjsx, :httpoison]
+      applications: [:logger, :httpoison]
     ]
   end
 
@@ -31,7 +31,6 @@ defmodule Lucas.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:yocingo, ">= 0.0.1"},
       {:table_rex, "~> 0.8.0"},
       {:httpoison, "~> 0.8.0"},
       {:trot, github: "hexedpackets/trot"}

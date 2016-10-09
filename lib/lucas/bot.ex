@@ -74,12 +74,8 @@ defmodule Lucas.Bot do
   end
 
   def process_message(message) do
-    try do
-      spawn fn ->
-        Lucas.BotReplyHandler.reply(message)
-      end
-    rescue
-      e in MatchError -> Logger.log :warn, "[ERR] #{e}"
-    end
+    Task.Supervisor.start_child(Lucas.Bot.TaskSupervisor, fn ->
+      Lucas.BotReplyHandler.reply(message)
+    end)
   end
 end
