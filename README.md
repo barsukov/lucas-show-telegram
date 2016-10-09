@@ -1,20 +1,8 @@
 # LucasShowTotBot
 
-**TODO: Add description**
+This is a simple telegram bot written on elixir. This is a side project which is not ready for prod, but still useful in Rusian speaking footbal telegram group and podcast about Liverpool FC. Currently it supports few commands most valueable is:
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add lucasshowtotbot to your list of dependencies in `mix.exs`:
-
-        def deps do
-          [{:lucasshowtotbot, "~> 0.0.1"}]
-        end
-
-  2. Ensure lucasshowtotbot is started before your application:
-
-        def application do
-          [applications: [:lucasshowtotbot]]
-        end
-
+   1. `/rank` - show current table of EPL 16/17 
+   2. `/gelezka` - random quote from podcast
+   3. `/joke` - random joke rating from 0 till 10
+   4. `/fantasy` - get access code for fantasy league 16/17.
