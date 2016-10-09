@@ -9,14 +9,14 @@ defmodule Lucas.Bot do
   defp token, do: System.get_env("TOT_TOKEN")
 
   def getUpdates(%{timeout: timeout, update_id: offset}) do
-    exec_cmd("getUpdates", %{timeout: timeout, offset: offset}) 
+    exec_cmd("getUpdates", %{timeout: timeout, offset: offset})
     |> resolve_updates
   end
 
   def resolve_updates({
     offset,
     {
-      :ok, 
+      :ok,
       %HTTPoison.Response{
         status_code: 200,
         body: %{"ok" => true, "result" => []}
@@ -25,10 +25,11 @@ defmodule Lucas.Bot do
   }) do
     offset
   end
+
   def resolve_updates({
     offset,
     {
-      :ok, 
+      :ok,
       %HTTPoison.Response{
         status_code: 200,
         body: %{"ok" => true, "result" => result}
@@ -38,24 +39,12 @@ defmodule Lucas.Bot do
     result
     |> process_messages
   end
-  def resolve_updates({
-    offset,
-    {
-      :ok,
-      %HTTPoison.Response{
-        status_code: 404
-      }
-    }
-  }) do
+
+  def resolve_updates({ offset, { :ok, %HTTPoison.Response { status_code: 404 } } } ) do
     offset
   end
-  def resolve_updates({
-    offset,
-    {
-      :error,
-      err
-    }
-  }) do
+
+  def resolve_updates({ offset, { :error, err }}) do
     Logger.error err
     offset
   end
@@ -63,6 +52,7 @@ defmodule Lucas.Bot do
   def exec_cmd(cmd, params=%{offset: offset}) do
     {offset, get(cmd, [], params: params)}
   end
+
   def exec_cmd(cmd, params) do
     get(cmd, [], params: params)
   end
