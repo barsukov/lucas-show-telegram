@@ -9,7 +9,8 @@ defmodule Lucas.Supervisor do
     IO.puts "starting"
 
     children = [
-      worker(Lucas.BotPoller, [%{timeout: 1, update_id: 0}], restart: :transient)
+      worker(Lucas.BotPoller, [%{timeout: 1, update_id: 0}], restart: :transient),
+      supervisor(Task.Supervisor, [[name: Lucas.Bot.TaskSupervisor]])
     ]
     supervise(children, strategy: :one_for_one)
   end
