@@ -1,4 +1,5 @@
 defmodule Lucas.BotReplyHandler do
+  require Logger
   def reply(%{"inline_query" => %{"id" => id , "query" => query}}) do
     results = Lucas.QuoteCommand.get_quote_by_query(query)
     Lucas.Bot.exec_cmd("answerInlineQuery", %{inline_query_id: id, results: results})
@@ -33,7 +34,7 @@ defmodule Lucas.BotReplyHandler do
        command_text = Lucas.FantasyCodeCommand.get_all_fantasy_code
        Lucas.Bot.exec_cmd("sendMessage", %{chat_id: id, parse_mode: "Markdown", text: "```" <> command_text <> "```"})
      true ->
-       IO.puts "Not matched"
+       Logger.warn "Not matched with text #{text}"
     end
   end
 end
