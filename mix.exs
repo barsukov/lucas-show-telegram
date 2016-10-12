@@ -15,8 +15,7 @@ defmodule Lucas.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [
-      mod: {Lucas, []},
-      applications: [:logger, :httpoison]
+      applications: [:logger, :httpoison, :agala]
     ]
   end
 
@@ -32,8 +31,7 @@ defmodule Lucas.Mixfile do
   defp deps do
     [
       {:table_rex, "~> 0.8.0"},
-      {:httpoison, "~> 0.8.0"},
-      {:trot, github: "hexedpackets/trot"}
+      {:agala, "~> 0.1.0"}
     ]
   end
 end
